@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>real search engine</title>
+    <style>
+		body {
+			background-color: #fff;
+			background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+			background-size: 200% 200%;
+			animation: gradient 10s ease infinite;
+		}
+
+		@keyframes gradient {
+			0% { background-position: 0% 50%; }
+			50% { background-position: 100% 50%; }
+			100% { background-position: 0% 50%; }
+		}
+	</style>
+</head>
+<body>
+    <input type="text" id="searchTerm" onkeydown="if (event.keyCode == 13) searchGoogle()">
+	<button onclick="searchGoogle()"></button>
+
+	<script>
+		function searchGoogle() {
+			let searchTerm = document.getElementById("searchTerm").value;
+			if (searchTerm.trim() === "") {
+				alert("write something first");
+				return;
+			}
+			window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(searchTerm);
+		}
+	</script>
+</body>
+</html>
