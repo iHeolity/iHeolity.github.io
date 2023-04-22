@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UUID Generator</title>
+  </head>
+  <body>
+    <h1>UUID Generator</h1>
+    <p>Click the button to generate a UUID:</p>
+    <button onclick="generateUUID()">Generate UUID</button>
+    <p>UUID: <span id="uuid"></span></p>
+
+    <script>
+      function generateUUID() {
+        var uuid = "";
+        var chars = "0123456789abcdef";
+        for (var i = 0; i < 32; i++) {
+          uuid += chars.charAt(Math.floor(Math.random() * chars.length));
+          if (i == 7 || i == 11 || i == 15 || i == 19) {
+            uuid += "-";
+          }
+        }
+        document.getElementById("uuid").innerHTML = uuid;
+      }
+    </script>
+  </body>
+</html>
