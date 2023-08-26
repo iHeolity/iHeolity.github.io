@@ -1,5 +1,5 @@
 # iHeolity.github.io
 
-Html testing 
+Html pages using chatGPT and my current knowledge
 
 https://iHeolity.github.io/
