@@ -17,16 +17,6 @@
 </head>
 <body>
 <h1>Wacky Fake Laws Generator</h1>
-<div>
-  <label>
-    <input type="checkbox" id="timeSpecific"> Time Specific
-  </label>
-</div>
-<div>
-  <label>
-    <input type="checkbox" id="includeOther"> Include Other
-  </label>
-</div>
 <button onclick="generateLaw()">Generate Law</button>
 <div id="output"></div>
 
@@ -53,8 +43,7 @@
   }
 
   function generateLaw() {
-    const timeSpecific = document.getElementById("timeSpecific").checked;
-    const includeOther = document.getElementById("includeOther").checked;
+    const includeOther = Math.random() < 0.5; // 50% chance to include "Other"
 
     let action = getRandomElement(actions);
     let object = getRandomElement(objects);
@@ -62,11 +51,7 @@
     lastAction = action;
     lastObject = object;
 
-    let law = "You can't " + action + " " + object;
-
-    if (timeSpecific) {
-      law += " " + getRandomElement(times);
-    }
+    let law = "You can't " + action + " " + object + " " + getRandomElement(times);
 
     if (includeOther) {
       law += " " + getRandomElement(others);
