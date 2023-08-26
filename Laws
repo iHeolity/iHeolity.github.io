@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #output {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+</style>
+<title>Wacky Fake Laws Generator</title>
+</head>
+<body>
+<h1>Wacky Fake Laws Generator</h1>
+<div>
+  <label>
+    <input type="checkbox" id="timeSpecific"> Time Specific
+  </label>
+</div>
+<div>
+  <label>
+    <input type="checkbox" id="includeOther"> Include Other
+  </label>
+</div>
+<button onclick="generateLaw()">Generate Law</button>
+<div id="output"></div>
+
+<script>
+  const actions = ["walk", "eat", "sing", "wear", "use", "carry", "dance", "jump", "read", "paint", "play", "throw", "draw"];
+  const objects = ["duck", "spoon", "socks", "umbrella", "banana", "toothbrush", "sunglasses", "guitar", "book", "hat", "phone", "frisbee"];
+  const times = ["past 4pm", "on Mondays", "during a full moon", "while wearing a hat", "in a dream", "when it's raining", "while sneezing", "during a solar eclipse", "at the stroke of midnight"];
+  const others = ["while hopping", "with your eyes closed", "backwards", "while juggling", "using only your pinky finger", "while whispering", "in a funny accent", "with a blindfold", "while standing on one foot"];
+
+  let lastAction = "";
+  let lastObject = "";
+
+  function getRandomElement(arr) {
+    let randomItem = arr[Math.floor(Math.random() * arr.length)];
+
+    // Ensure the same action or object isn't repeated in consecutive laws
+    if (arr === actions && randomItem === lastAction) {
+      return getRandomElement(arr);
+    } else if (arr === objects && randomItem === lastObject) {
+      return getRandomElement(arr);
+    }
+
+    return randomItem;
+  }
+
+  function generateLaw() {
+    const timeSpecific = document.getElementById("timeSpecific").checked;
+    const includeOther = document.getElementById("includeOther").checked;
+
+    let action = getRandomElement(actions);
+    let object = getRandomElement(objects);
+
+    lastAction = action;
+    lastObject = object;
+
+    let law = "You can't " + action + " " + object;
+
+    if (timeSpecific) {
+      law += " " + getRandomElement(times);
+    }
+
+    if (includeOther) {
+      law += " " + getRandomElement(others);
+    }
+
+    document.getElementById("output").textContent = law + ".";
+  }
+</script>
+</body>
+</html>
