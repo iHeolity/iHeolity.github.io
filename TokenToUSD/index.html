@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Token to USD Converter</title>
+    <title>Currency Converter</title>
     <style>
         body {
             display: flex;
@@ -29,22 +29,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Token to USD Converter</h1>
-        <label for="tokenInput">Enter the number of tokens: </label>
-        <input type="number" id="tokenInput" placeholder="Tokens">
+        <h1>Currency Converter</h1>
+        <label for="amountInput">Enter the amount: </label>
+        <input type="number" id="amountInput" placeholder="Amount">
+        <select id="conversionType">
+            <option value="tokensToUSD">Tokens to USD</option>
+            <option value="usdToTokens">USD to Tokens</option>
+        </select>
         <p>2500 tokens are worth $4.99 USD, this converter does not take bonus tokens into account and is therefore not 100% accurate</p>
-        <button onclick="convertTokens()">Convert</button>
+        <button onclick="convertCurrency()">Convert</button>
         <div id="result"></div>
     </div>
 
     <script>
-        function convertTokens() {
-            const tokenInput = document.getElementById("tokenInput").value;
-            const conversionRate = 4.99 / 2500;
-            const usdValue = tokenInput * conversionRate;
+        function convertCurrency() {
+            const amountInput = parseFloat(document.getElementById("amountInput").value);
+            const conversionType = document.getElementById("conversionType").value;
+            const tokensToUSDConversionRate = 4.99 / 2500;
 
-            const resultElement = document.getElementById("result");
-            resultElement.textContent = `The real-life value is $${usdValue.toFixed(2)} USD`;
+            let result;
+            if (conversionType === "tokensToUSD") {
+                result = amountInput * tokensToUSDConversionRate;
+                document.getElementById("result").textContent = `The real-life value is $${result.toFixed(2)} USD`;
+            } else if (conversionType === "usdToTokens") {
+                result = amountInput / tokensToUSDConversionRate;
+                document.getElementById("result").textContent = `$The Rec Room value is {result.toFixed(2)} tokens`;
+            }
         }
     </script>
 </body>
